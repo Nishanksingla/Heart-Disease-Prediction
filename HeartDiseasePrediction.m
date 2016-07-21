@@ -1,10 +1,9 @@
 clear ; close all; clc
 input_layer_size  = 13;  
-hidden_layer_size = 10;  
+hidden_layer_size = 16;  
 num_labels = 5;
 
-fprintf('Loading and Visualizing Data ...\n')
-data = csvread('/Users/nishanksingla/Documents/297MachineLearningSubmissions/Project/csv/hungarian/reprocessedhungariandata.csv');
+data = csvread('/Users/nishanksingla/Documents/297MachineLearningSubmissions/Project/csv/switzerland/processedSwitzerlandData.csv');
 
 X = data(:,1:13);
 y = data(:,14);
@@ -27,10 +26,7 @@ options = optimset('MaxIter', 150);
 
 lambda = .003;
 
-costFunction = @(p) nnCostFunction(p, ...
-                                   input_layer_size, ...
-                                   hidden_layer_size, ...
-                                   num_labels, X, y, lambda);
+costFunction = @(p) nnCostFunction(p, input_layer_size, hidden_layer_size, num_labels, X, y, lambda);
 
 
 [nn_params, cost] = fmincg(costFunction, initial_nn_params, options);
